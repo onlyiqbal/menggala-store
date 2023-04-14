@@ -1,0 +1,83 @@
+@startuml Entiti Diagram
+
+  entity "users" as users {
+    *id : int
+    --
+    name : varchar
+    --
+    email : varchar
+    --
+    username : varchar
+    --
+    password : varchar
+    --
+    address : varchar
+    --
+    no_hp : text
+    --
+    title : varchar
+  }
+
+  entity "sessions" as sessions {
+    *id : int
+    --
+    user_id : int
+  }
+
+  entity "products" as products {
+    *id : int
+    --
+    description : varchar
+    --
+    price : int
+    --
+    stock : int
+    --
+    created_at : date
+    --
+    image_name : varchar
+    --
+    type_image: varchar
+    --
+    size_image : bigint
+  }
+
+  entity "orders" as orders {
+    *id : int
+    --
+    user_id : int
+    --
+    product_id : int
+    --
+    size : varchar
+    --
+    quantity: int
+    --
+    courier : varchar
+    --
+    date_in : date
+    --
+    total : int
+  }
+
+  entity "carts" as carts {
+    *id : int
+    --
+    user_id : int
+    --
+    product_id : int
+    --
+    size : varchar
+    --
+    quantity : int
+    --
+    courier : varchar
+    --
+    date_in : date
+    --
+    total : int
+  }
+
+  users ||..|{ sessions
+
+@enduml
