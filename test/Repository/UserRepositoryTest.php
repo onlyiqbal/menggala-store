@@ -9,9 +9,13 @@ use PHPUnit\Framework\TestCase;
 class UserRepositoryTest extends TestCase
 {
   private UserRepository $userRepository;
+  private SessionRepository $sessionRepository;
 
   protected function setUp(): void
   {
+    $this->sessionRepository = new SessionRepository(Database::getConnection());
+    $this->sessionRepository->deleteAll();
+
     $this->userRepository = new UserRepository(Database::getConnection());
     $this->userRepository->deleteAll();
   }
