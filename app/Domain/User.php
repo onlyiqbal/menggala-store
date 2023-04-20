@@ -11,5 +11,5 @@ class User
   public string $password;
   public string $address;
   public string $no_hp;
-  public string $status;
+  public string $status = "user";
 }

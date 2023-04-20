@@ -16,16 +16,16 @@ class UserRepository
 
   public function save(User $user): User
   {
-    $statement = $this->connection->prepare("INSERT INTO users(id, name, email, username, password, address, no_hp, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $statement->execute([$user->id, $user->name, $user->email, $user->username, $user->password, $user->address, $user->no_hp, $user->status]);
+    $statement = $this->connection->prepare("INSERT INTO users(name, email, username, password, address, no_hp, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $statement->execute([$user->name, $user->email, $user->username, $user->password, $user->address, $user->no_hp, $user->status]);
 
     return $user;
   }
 
-  public function findById(int $id): ?User
+  public function findByNoHp(string $no_hp): ?User
   {
-    $statement = $this->connection->prepare("SELECT id, name, email, username, password, address, no_hp, status FROM users WHERE id = ?");
-    $statement->execute([$id]);
+    $statement = $this->connection->prepare("SELECT id, name, email, username, password, address, no_hp, status FROM users WHERE no_hp = ?");
+    $statement->execute([$no_hp]);
 
     try {
       if ($row = $statement->fetch()) {
