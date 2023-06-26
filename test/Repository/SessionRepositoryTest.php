@@ -33,13 +33,31 @@ class SessionRepositoryTest extends TestCase
   public function testSaveSuccess()
   {
     $session = new Session();
-    $session->id = uniqid();
-    $session->user_id = "25";
-
+    $session->session_id = uniqid();
+    $session->user_id = "28";
     $this->sessionRepository->save($session);
-    $result = $this->sessionRepository->findById($session->id);
 
-    $this->assertEquals($session->id, $result->id);
+    $result = $this->sessionRepository->findById($session->session_id);
+
+    $this->assertEquals($session->session_id, $result->session_id);
     $this->assertEquals($session->user_id, $result->user_id);
+  }
+
+  public function testDeleteByIdSuccess()
+  {
+    $session = new Session();
+    $session->session_id = uniqid();
+    $session->user_id = "30";
+    $this->sessionRepository->save($session);
+
+    $result = $this->sessionRepository->findById($session->session_id);
+
+    $this->assertEquals($session->session_id, $result->session_id);
+    $this->assertEquals($session->user_id, $result->user_id);
+
+    $this->sessionRepository->deleteById($session->session_id);
+    $result = $this->sessionRepository->findById($session->session_id);
+
+    $this->assertNull($result);
   }
 }

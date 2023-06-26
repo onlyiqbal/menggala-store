@@ -34,7 +34,7 @@ class UserServiceTest extends TestCase
     $request->email = "budi@gmail.com";
     $request->no_hp = "089254678312";
     $request->address = "jl.ampera";
-    $request->username = "budi anduk";
+    $request->username = "budianduk";
     $request->password = "qwerty123";
 
     $response = $this->userService->register($request);
@@ -43,17 +43,57 @@ class UserServiceTest extends TestCase
     $this->assertEquals($request->no_hp, $response->user->no_hp);
   }
 
-  public function testLoginSuccess()
+  public function testRegisterFailed()
+  {
+    $this->expectException(ValidationException::class);
+
+    $request = new UserRegisterRequest();
+    $request->name = "";
+    $request->email = "";
+    $request->no_hp = "";
+    $request->address = "";
+    $request->username = "";
+    $request->password = "";
+
+    $this->userService->register($request);
+  }
+
+  public function testRegisterDuplicate()
   {
     $user = new User();
     $user->name = "budi";
-    $user->email = "budi@gmail.com";
-    $user->no_hp = "089478582912";
-    $user->address = "jl.dulu aja";
+    $user->email = "tes@gmail.com";
     $user->username = "budianduk";
-    $user->password = password_hash("qwerty123", PASSWORD_BCRYPT);
+    $user->password = "qwerty123";
+    $user->address = "jl.bersama";
+    $user->no_hp = "081234567451";
+    $user->status = "user";
 
+    $this->userRepository->save($user);
     $this->expectException(ValidationException::class);
+
+    $request = new UserRegisterRequest();
+    $request->name = "budi";
+    $request->email = "budi@gmail.com";
+    $request->no_hp = "081234567451";
+    $request->address = "jl.ampera";
+    $request->username = "budianduk";
+    $request->password = "qwerty123";
+
+    $this->userService->register($request);
+  }
+
+  public function testLoginSuccess()
+  {
+    $request = new UserRegisterRequest();
+    $request->name = "budi";
+    $request->email = "budi@gmail.com";
+    $request->no_hp = "089254678312";
+    $request->address = "jl.ampera";
+    $request->username = "budianduk";
+    $request->password = "qwerty123";
+
+    $response = $this->userService->register($request);
 
     $request = new UserLoginRequest();
     $request->username = "budianduk";
@@ -62,6 +102,38 @@ class UserServiceTest extends TestCase
     $response = $this->userService->login($request);
 
     $this->assertEquals($request->username, $response->user->username);
-    $this->assertTrue($request->password, $response->user->password);
+    $this->assertTrue(password_verify($request->password, $response->user->password));
+  }
+
+  public function testLoginNotFound()
+  {
+    $this->expectException(ValidationException::class);
+
+    $request = new UserLoginRequest();
+    $request->username = "budianduk";
+    $request->password = "qwerty123";
+
+    $this->userService->login($request);
+  }
+
+  public function testLoginPasswordWrong()
+  {
+    $request = new UserRegisterRequest();
+    $request->name = "budi";
+    $request->email = "budi@gmail.com";
+    $request->no_hp = "089254678312";
+    $request->address = "jl.ampera";
+    $request->username = "budianduk";
+    $request->password = "qwerty123";
+
+    $this->userService->register($request);
+
+    $this->expectException(ValidationException::class);
+
+    $request = new UserLoginRequest();
+    $request->username = "budianduk";
+    $request->password = "salah";
+
+    $this->userService->login($request);
   }
 }

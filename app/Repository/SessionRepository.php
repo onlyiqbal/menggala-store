@@ -16,34 +16,36 @@ class SessionRepository
 
   public function save(Session $session): Session
   {
-    $statement = $this->connection->prepare("INSERT INTO sessions(id, user_id) VALUES (?, ?)");
-    $statement->execute([$session->id, $session->user_id]);
+    $statement = $this->connection->prepare("INSERT INTO sessions(session_id, user_id) VALUES (?, ?)");
+    $statement->execute([$session->session_id, $session->user_id]);
 
     return $session;
   }
 
-  public function findById(string $id): ?Session
+  public function findById(string $session_id): ?Session
   {
-    $statement = $this->connection->prepare("SELECT id, user_id FROM sessions WHERE id = ?");
-    $statement->execute([$id]);
+    $statement = $this->connection->prepare("SELECT session_id, user_id FROM sessions WHERE session_id = ?");
+    $statement->execute([$session_id]);
 
     try {
       if ($row = $statement->fetch()) {
         $session = new Session();
-        $session->id = $row['id'];
+        $session->session_id = $row['session_id'];
         $session->user_id = $row['user_id'];
 
         return $session;
+      } else {
+        return null;
       }
     } finally {
       $statement->closeCursor();
     }
   }
 
-  public function deleteById(int $id): void
+  public function deleteById(string $session_id): void
   {
-    $statement = $this->connection->prepare("DELETE FROM sessions WHERE id = ?");
-    $statement->execute([$id]);
+    $statement = $this->connection->prepare("DELETE FROM sessions WHERE session_id = ?");
+    $statement->execute([$session_id]);
   }
 
   public function deleteAll(): void

@@ -4,13 +4,16 @@ namespace Iqbal\MenggalaStore\App;
 
 class View
 {
-
-    public static function render(string $view, $model)
+    public static function render(string $view, $model): void
     {
         require __DIR__ . '/../View/' . $view . '.php';
     }
-    public static function load(string $template, $view, $model =  null)
+
+    public static function redirect(string $url): void
     {
-        require __DIR__ . '/../View/' . $template . '.php';
+        header("Location: $url");
+        if (getenv("mode") != "test") {
+            exit();
+        }
     }
 }

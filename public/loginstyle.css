@@ -1,0 +1,160 @@
+/* code by muh iriansyah putra pratama */
+body {
+  background: #455;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.login {
+  width: 400px;
+  margin: 100px auto;
+  font-size: 16px;
+}
+
+/* code by muh iriansyah putra pratama */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.login-header {
+  background: #22bb6d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  border-bottom: 5px solid #16a85d;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* code by muh iriansyah putra pratama */
+.login p {
+  color: #383838;
+  padding: 12px;
+}
+
+.login input,
+textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  border-radius: 5px;
+}
+
+.login input[type="Text"],
+.login input[type="password"],
+.login input[type="email"],
+.login textarea {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* code by muh iriansyah putra pratama */
+.login input[type="text"]:focus,
+.login input[type="password"]:focus,
+.login input[type="email"]:focus,
+.login textarea:focus {
+  border: 1px solid #22bb6d;
+}
+
+.login input[type="submit"] {
+  background: #22bb6d;
+  color: #fff;
+  cursor: pointer;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 6px solid #16a85d;
+}
+
+.login input[type="submit"]:hover {
+  background: #16a85d;
+}
+
+/* code by muh iriansyah putra pratama */
+.login input[type="submit"]:focus {
+  border-color: #16a85d;
+}
+
+a {
+  text-decoration: none;
+  color: #22bb6d;
+}
+
+a:hover {
+  background: #22bb6d;
+  border-radius: 5px;
+  padding: 5px;
+  color: #FFF;
+}
+
+.tombol-biru {
+  background: red;
+  color: white;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 4px solid red;
+  border-radius: 5px;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+.tombol-biru:hover {
+  background: red;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+/* code by muh iriansyah putra pratama */
+.tombol-merah {
+  background: #ef4162;
+  color: white;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 4px solid #da2648;
+  border-radius: 5px;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+.tombol-merah:hover {
+  background: #da2648;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+hr {
+  border: 0;
+  border-top: 3px double #22bb6d;
+}
+
+/* code by muh iriansyah putra pratama */

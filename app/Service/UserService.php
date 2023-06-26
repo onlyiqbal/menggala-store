@@ -77,6 +77,8 @@ class UserService
       $response->user = $user;
 
       return $response;
+    } else {
+      throw new ValidationException("username atau password salah");
     }
   }
 
